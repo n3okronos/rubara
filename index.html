@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rubara Media - Agencia de publicidad y comercialización. Transformamos marcas en experiencias memorables.">
+    <title>Rubara Media | Publicidad & Comercialización</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #0d1b2a;
+            --navy-primary: #1b263b;
+            --blue-electric: #0077b6;
+            --blue-vivid: #00a8e8;
+            --blue-bright: #48cae4;
+            --silver-light: #e8eaed;
+            --silver-mid: #adb5bd;
+            --white: #ffffff;
+            --gradient-main: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0077b6 100%);
+            --gradient-accent: linear-gradient(90deg, #00a8e8, #48cae4, #00a8e8);
+            --gradient-card: linear-gradient(180deg, rgba(27,38,59,0.9) 0%, rgba(13,27,42,0.95) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--navy-deep);
+            color: var(--silver-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Cursor follower */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,168,232,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--white), var(--blue-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--silver-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue-bright);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--blue-vivid);
+            color: var(--blue-bright);
+            padding: 0.75rem 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-accent);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .nav-cta:hover {
+            color: var(--navy-deep);
+            border-color: var(--blue-bright);
+        }
+
+        .nav-cta:hover::before {
+            left: 0;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--silver-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 8rem 5% 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(0,119,182,0.2) 0%, transparent 60%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(72,202,228,0.1) 0%, transparent 60%);
+            animation: float 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 168, 232, 0.1);
+            border: 1px solid rgba(0, 168, 232, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--blue-bright);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--blue-vivid);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-title .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--silver-mid);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--navy-deep);
+            padding: 1rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 168, 232, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--silver-light);
+            padding: 1rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 1px solid var(--silver-mid);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--blue-bright);
+            color: var(--blue-bright);
+        }
+
+        .btn-secondary svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-secondary:hover svg {
+            transform: rotate(45deg);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-spiral {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+            position: relative;
+        }
+
+        .hero-spiral img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 60px rgba(0, 168, 232, 0.4));
+            transition: transform 0.4s ease;
+        }
+
+        .hero-spiral:hover img {
+            transform: scale(1.05);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--gradient-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(72, 202, 228, 0.2);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        .floating-card.card-1 {
+            top: 10%;
+            right: 0;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 20%;
+            left: 0;
+            animation-delay: 2s;
+        }
+
+        .floating-card.card-3 {
+            bottom: 5%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating-card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 168, 232, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .floating-card-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--blue-bright);
+        }
+
+        .floating-card-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .floating-card-sub {
+            font-size: 0.75rem;
+            color: var(--silver-mid);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(27, 38, 59, 0.5);
+            border-top: 1px solid rgba(72, 202, 228, 0.1);
+            border-bottom: 1px solid rgba(72, 202, 228, 0.1);
+            padding: 3rem 5%;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(72, 202, 228, 0.3), transparent);
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--silver-mid);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--blue-vivid);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .section-subtitle {
+            color: var(--silver-mid);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(72, 202, 228, 0.1);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(72, 202, 228, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0, 168, 232, 0.2), rgba(72, 202, 228, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-accent);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--blue-bright);
+            transition: stroke 0.4s ease;
+        }
+
+        .service-card:hover .service-icon svg {
+            stroke: var(--navy-deep);
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--silver-mid);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--blue-bright);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        .service-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(180deg, transparent, var(--blue-vivid), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(72, 202, 228, 0.3);
+            transform: translate(20px, 20px);
+            z-index: -1;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: filter 0.4s ease;
+        }
+
+        .about-image-wrapper:hover .about-image {
+            filter: grayscale(0%);
+        }
+
+        .about-stats {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--gradient-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(72, 202, 228, 0.2);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blue-bright);
+        }
+
+        .about-stat-label {
+            font-size: 0.8rem;
+            color: var(--silver-mid);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-content {
+            padding-left: 2rem;
+        }
+
+        .about-content .section-tag {
+            text-align: left;
+        }
+
+        .about-content .section-title {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text {
+            color: var(--silver-mid);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .about-feature-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: rgba(0, 168, 232, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-feature-icon svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--blue-bright);
+        }
+
+        .about-feature-text {
+            font-size: 0.95rem;
+            color: var(--silver-light);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            background: var(--navy-deep);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item:nth-child(1) {
+            grid-column: span 6;
+        }
+
+        .portfolio-item:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        .portfolio-item:nth-child(3) {
+            grid-column: span 3;
+        }
+
+        .portfolio-item:nth-child(4) {
+            grid-column: span 4;
+        }
+
+        .portfolio-item:nth-child(5) {
+            grid-column: span 8;
+        }
+
+        .portfolio-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--navy-primary), var(--blue-electric));
+            opacity: 0.8;
+        }
+
+        .portfolio-item:nth-child(2) .portfolio-bg {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+
+        .portfolio-item:nth-child(3) .portfolio-bg {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+        }
+
+        .portfolio-item:nth-child(4) .portfolio-bg {
+            background: linear-gradient(135deg, #1a1a2e, #0077b6);
+        }
+
+        .portfolio-item:nth-child(5) .portfolio-bg {
+            background: linear-gradient(45deg, #16213e, #0d1b2a);
+        }
+
+        .portfolio-content {
+            position: absolute;
+            inset: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(180deg, transparent 40%, rgba(13, 27, 42, 0.9) 100%);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-category {
+            font-size: 0.8rem;
+            color: var(--blue-bright);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-desc {
+            font-size: 0.9rem;
+            color: var(--silver-mid);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 5%;
+            background: var(--navy-primary);
+            position: relative;
+        }
+
+        .process-timeline {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--blue-vivid), var(--blue-bright), var(--blue-vivid));
+            transform: translateX(-50%);
+        }
+
+        .process-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-content {
+            width: calc(50% - 60px);
+            background: var(--gradient-card);
+            border: 1px solid rgba(72, 202, 228, 0.1);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .process-item:nth-child(odd) .process-content {
+            margin-right: auto;
+            text-align: right;
+        }
+
+        .process-item:nth-child(even) .process-content {
+            margin-left: auto;
+            text-align: left;
+        }
+
+        .process-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            z-index: 2;
+        }
+
+        .process-title {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .process-desc {
+            color: var(--silver-mid);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            background: var(--navy-deep);
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-info .section-tag,
+        .contact-info .section-title {
+            text-align: left;
+        }
+
+        .contact-text {
+            color: var(--silver-mid);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-method-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 168, 232, 0.1);
+            border: 1px solid rgba(0, 168, 232, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-method-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--blue-bright);
+        }
+
+        .contact-method-content h4 {
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method-content p {
+            font-size: 0.9rem;
+            color: var(--silver-mid);
+        }
+
+        .contact-method-content a {
+            color: var(--blue-bright);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-method-content a:hover {
+            color: var(--white);
+        }
+
+        .contact-form-wrapper {
+            background: var(--gradient-card);
+            border: 1px solid rgba(72, 202, 228, 0.1);
+            padding: 3rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--silver-light);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: rgba(13, 27, 42, 0.8);
+            border: 1px solid rgba(72, 202, 228, 0.2);
+            padding: 1rem;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--blue-vivid);
+            box-shadow: 0 0 20px rgba(0, 168, 232, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--navy-deep);
+        }
+
+        .form-submit {
+            background: var(--gradient-accent);
+            color: var(--navy-deep);
+            padding: 1.25rem 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            justify-self: start;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 168, 232, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--navy-primary);
+            border-top: 1px solid rgba(72, 202, 228, 0.1);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-desc {
+            color: var(--silver-mid);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 168, 232, 0.1);
+            border: 1px solid rgba(0, 168, 232, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--blue-vivid);
+            border-color: var(--blue-vivid);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--blue-bright);
+            transition: stroke 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            stroke: var(--navy-deep);
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--silver-mid);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--blue-bright);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(72, 202, 228, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: var(--silver-mid);
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: var(--silver-mid);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--blue-bright);
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 999;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 168, 232, 0.5);
+        }
+
+        .scroll-top svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--navy-deep);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-spiral {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(3, 250px);
+            }
+
+            .portfolio-item:nth-child(1) {
+                grid-column: span 6;
+            }
+
+            .portfolio-item:nth-child(2),
+            .portfolio-item:nth-child(3) {
+                grid-column: span 3;
+            }
+
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(5) {
+                grid-column: span 3;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(13, 27, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin-top: 1.5rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .portfolio-item,
+            .portfolio-item:nth-child(n) {
+                grid-column: span 1;
+                height: 200px;
+            }
+
+            .portfolio-content {
+                opacity: 1;
+                transform: none;
+            }
+
+            .process-timeline::before {
+                left: 25px;
+            }
+
+            .process-item,
+            .process-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .process-content,
+            .process-item:nth-child(odd) .process-content,
+            .process-item:nth-child(even) .process-content {
+                width: 100%;
+                margin-left: 60px;
+                text-align: left;
+            }
+
+            .process-number {
+                left: 25px;
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-card {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .contact-form-wrapper {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cursor glow effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-logo">
+            <img src="RUBARA_LOGO.png" alt="Rubara Media">
+            <span class="nav-logo-text">RUBARA</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#portafolio">Portafolio</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <button class="nav-cta">Cotizar Proyecto</button>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>Agencia Creativa de Publicidad</span>
+                </div>
+                <h1 class="hero-title">
+                    Transformamos ideas en <span class="highlight">experiencias memorables</span>
+                </h1>
+                <p class="hero-description">
+                    Somos especialistas en publicidad estratégica y comercialización de servicios. Creamos campañas que conectan marcas con audiencias de manera auténtica y efectiva.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+                        Iniciar Proyecto
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('portafolio').scrollIntoView({behavior: 'smooth'})">
+                        Ver Portafolio
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-spiral">
+                    <img src="RUBARA_LOGO.png" alt="Rubara Media Logo">
+                </div>
+                <div class="floating-card card-1">
+                    <div class="floating-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div class="floating-card-text">+150 Proyectos</div>
+                    <div class="floating-card-sub">Campañas exitosas</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="floating-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <div class="floating-card-text">Entrega Rápida</div>
+                    <div class="floating-card-sub">Tiempos óptimos</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="floating-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="floating-card-text">ROI Garantizado</div>
+                    <div class="floating-card-sub">Resultados medibles</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Años de Experiencia</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Proyectos Completados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Clientes Satisfechos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Tasa de Retención</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <span class="section-tag">Nuestros Servicios</span>
+            <h2 class="section-title">Soluciones integrales para tu marca</h2>
+            <p class="section-subtitle">
+                Ofrecemos un portafolio completo de servicios de publicidad y comercialización diseñados para impulsar el crecimiento de tu negocio.
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                        <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                        <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Publicidad Digital</h3>
+                <p class="service-description">
+                    Campañas en redes sociales, Google Ads, programática y estrategias de marketing digital que maximizan tu inversión publicitaria.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Branding & Diseño</h3>
+                <p class="service-description">
+                    Desarrollo de identidad visual, diseño de logotipos, material corporativo y guías de marca que comunican la esencia de tu empresa.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Producción Audiovisual</h3>
+                <p class="service-description">
+                    Creación de contenido en video, spots publicitarios, animaciones y fotografía profesional para todos tus canales de comunicación.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Estrategia de Medios</h3>
+                <p class="service-description">
+                    Planificación y compra de medios tradicionales y digitales, optimizando la exposición de tu marca ante las audiencias correctas.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Comercialización</h3>
+                <p class="service-description">
+                    Desarrollo de estrategias comerciales, gestión de canales de distribución y alianzas estratégicas para expandir tu alcance de mercado.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Eventos & BTL</h3>
+                <p class="service-description">
+                    Activaciones de marca, eventos corporativos, promociones y experiencias que generan conexiones memorables con tus clientes.
+                </p>
+                <a href="#contacto" class="service-link">
+                    Conocer más
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="about-grid">
+            <div class="about-visual">
+                <div class="about-image-wrapper">
+                    <svg class="about-image" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="teamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0077b6"/>
+                                <stop offset="100%" style="stop-color:#00a8e8"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="400" height="300" fill="#1b263b"/>
+                        <circle cx="100" cy="150" r="40" fill="url(#teamGrad)" opacity="0.8"/>
+                        <circle cx="200" cy="120" r="50" fill="url(#teamGrad)" opacity="0.6"/>
+                        <circle cx="300" cy="160" r="45" fill="url(#teamGrad)" opacity="0.7"/>
+                        <rect x="60" y="200" width="80" height="60" rx="5" fill="#0d1b2a" opacity="0.8"/>
+                        <rect x="160" y="180" width="80" height="80" rx="5" fill="#0d1b2a" opacity="0.8"/>
+                        <rect x="260" y="210" width="80" height="50" rx="5" fill="#0d1b2a" opacity="0.8"/>
+                        <path d="M50 250 Q200 200 350 250" stroke="#48cae4" stroke-width="2" fill="none" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="about-stat-number">8+</div>
+                        <div class="about-stat-label">Años</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">25+</div>
+                        <div class="about-stat-label">Equipo</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">50+</div>
+                        <div class="about-stat-label">Clientes</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">3</div>
+                        <div class="about-stat-label">Oficinas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <span class="section-tag">Sobre Nosotros</span>
+                <h2 class="section-title">Una agencia con visión estratégica y pasión creativa</h2>
+                <p class="about-text">
+                    En Rubara Media combinamos estrategia, creatividad y tecnología para desarrollar soluciones publicitarias que realmente funcionan. Nuestro equipo multidisciplinario trabaja de la mano con cada cliente para entender sus objetivos y crear campañas que generan resultados tangibles.
+                </p>
+                <p class="about-text">
+                    Nos especializamos en la comercialización de bienes y servicios relacionados con la promoción, ayudando a empresas de todos los tamaños a posicionarse efectivamente en el mercado mexicano y más allá.
+                </p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <span class="about-feature-text">Estrategias basadas en datos</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <span class="about-feature-text">Equipo creativo certificado</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <span class="about-feature-text">Atención personalizada 24/7</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <span class="about-feature-text">Resultados medibles y reportados</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+                    Conoce al Equipo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portafolio">
+        <div class="section-header">
+            <span class="section-tag">Nuestro Trabajo</span>
+            <h2 class="section-title">Proyectos que hablan por sí mismos</h2>
+            <p class="section-subtitle">
+                Una selección de campañas y proyectos que demuestran nuestra capacidad de crear impacto real.
+            </p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-bg"></div>
+                <div class="portfolio-content">
+                    <span class="portfolio-category">Campaña Digital</span>
+                    <h3 class="portfolio-title">Lanzamiento Producto Tech</h3>
+                    <p class="portfolio-desc">Estrategia integral de lanzamiento con +2M de impresiones</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg"></div>
+                <div class="portfolio-content">
+                    <span class="portfolio-category">Branding</span>
+                    <h3 class="portfolio-title">Identidad Corporativa</h3>
+                    <p class="portfolio-desc">Rediseño completo de marca</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg"></div>
+                <div class="portfolio-content">
+                    <span class="portfolio-category">Audiovisual</span>
+                    <h3 class="portfolio-title">Serie Documental</h3>
+                    <p class="portfolio-desc">Producción de contenido premium</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg"></div>
+                <div class="portfolio-content">
+                    <span class="portfolio-category">Eventos BTL</span>
+                    <h3 class="portfolio-title">Activación Nacional</h3>
+                    <p class="portfolio-desc">Presencia en 15 ciudades</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg"></div>
+                <div class="portfolio-content">
+                    <span class="portfolio-category">Estrategia de Medios</span>
+                    <h3 class="portfolio-title">Campaña Omnicanal</h3>
+                    <p class="portfolio-desc">Integración de medios tradicionales y digitales con alcance de +5M</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="proceso">
+        <div class="section-header">
+            <span class="section-tag">Nuestro Proceso</span>
+            <h2 class="section-title">Cómo trabajamos contigo</h2>
+            <p class="section-subtitle">
+                Un proceso estructurado que garantiza resultados excepcionales en cada proyecto.
+            </p>
+        </div>
+        <div class="process-timeline">
+            <div class="process-item">
+                <div class="process-number">01</div>
+                <div class="process-content">
+                    <h3 class="process-title">Descubrimiento</h3>
+                    <p class="process-desc">
+                        Analizamos tu marca, objetivos, competencia y mercado para entender el contexto completo de tu proyecto.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">02</div>
+                <div class="process-content">
+                    <h3 class="process-title">Estrategia</h3>
+                    <p class="process-desc">
+                        Desarrollamos un plan estratégico con objetivos claros, KPIs definidos y un roadmap de implementación.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">03</div>
+                <div class="process-content">
+                    <h3 class="process-title">Creación</h3>
+                    <p class="process-desc">
+                        Nuestro equipo creativo desarrolla los conceptos, diseños y contenidos que darán vida a la estrategia.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">04</div>
+                <div class="process-content">
+                    <h3 class="process-title">Ejecución</h3>
+                    <p class="process-desc">
+                        Implementamos la campaña en los canales seleccionados, monitoreando cada detalle de la operación.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">05</div>
+                <div class="process-content">
+                    <h3 class="process-title">Optimización</h3>
+                    <p class="process-desc">
+                        Medimos, analizamos y optimizamos continuamente para maximizar el retorno de tu inversión.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <span class="section-tag">Contacto</span>
+                <h2 class="section-title">Hablemos de tu próximo proyecto</h2>
+                <p class="contact-text">
+                    Estamos listos para ayudarte a llevar tu marca al siguiente nivel. Cuéntanos sobre tu proyecto y te contactaremos a la brevedad.
+                </p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+525555555555">+52 (55) 5555-5555</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>Email</h4>
+                            <p><a href="mailto:contacto@rubaramedia.com">contacto@rubaramedia.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>Dirección</h4>
+                            <p>Ciudad de México, México</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrapper">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+52 (55) 1234-5678">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Servicio de interés</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Selecciona un servicio</option>
+                            <option value="publicidad-digital">Publicidad Digital</option>
+                            <option value="branding">Branding & Diseño</option>
+                            <option value="audiovisual">Producción Audiovisual</option>
+                            <option value="estrategia-medios">Estrategia de Medios</option>
+                            <option value="comercializacion">Comercialización</option>
+                            <option value="eventos-btl">Eventos & BTL</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="RUBARA_LOGO.png" alt="Rubara Media">
+                    <span>RUBARA</span>
+                </div>
+                <p class="footer-desc">
+                    Agencia de publicidad y comercialización comprometida con el éxito de nuestros clientes. Transformamos ideas en resultados.
+                </p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Servicios</h4>
+                <ul class="footer-links">
+                    <li><a href="#servicios">Publicidad Digital</a></li>
+                    <li><a href="#servicios">Branding & Diseño</a></li>
+                    <li><a href="#servicios">Producción Audiovisual</a></li>
+                    <li><a href="#servicios">Estrategia de Medios</a></li>
+                    <li><a href="#servicios">Comercialización</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="#nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#portafolio">Portafolio</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#">Carreras</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Casos de Éxito</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Cotización</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2025 Rubara Media. Todos los derechos reservados.</p>
+            <div class="footer-legal">
+                <a href="#">Aviso de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script>
+        // Cursor glow effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
+
+        // Hide cursor glow on mobile
+        if (window.innerWidth <= 768) {
+            cursorGlow.style.display = 'none';
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', data);
+
+            // Show success message
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            contactForm.reset();
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Observe stat items
+        document.querySelectorAll('.stat-item').forEach((stat, index) => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'translateY(20px)';
+            stat.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            observer.observe(stat);
+        });
+
+        // Animate numbers on scroll
+        const animateNumbers = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = target.textContent;
+                    const numericValue = parseInt(finalValue);
+
+                    if (!isNaN(numericValue)) {
+                        let current = 0;
+                        const increment = numericValue / 50;
+                        const suffix = finalValue.replace(/[0-9]/g, '');
+
+                        const counter = setInterval(() => {
+                            current += increment;
+                            if (current >= numericValue) {
+                                target.textContent = finalValue;
+                                clearInterval(counter);
+                            } else {
+                                target.textContent = Math.floor(current) + suffix;
+                            }
+                        }, 30);
+                    }
+                }
+            });
+        };
+
+        const numberObserver = new IntersectionObserver(animateNumbers, { threshold: 0.5 });
+        document.querySelectorAll('.stat-number, .about-stat-number').forEach(num => {
+            numberObserver.observe(num);
+        });
+    </script>
+</body>
+</html>
