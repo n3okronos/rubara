@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.rubaramedia.com/sitemap.xml
+Sitemap: https://rubaramedia.com/sitemap.xml
