@@ -1451,13 +1451,18 @@
             .process-item,
             .process-item:nth-child(even) {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
+            /* width:100% + margin-left:60px sumaba 100%+60px y, al centrarse el
+               item, recortaba el badge y la primera letra del texto. */
             .process-content,
             .process-item:nth-child(odd) .process-content,
             .process-item:nth-child(even) .process-content {
-                width: 100%;
+                width: calc(100% - 60px);
                 margin-left: 60px;
+                margin-right: 0;
+                align-self: flex-start;
                 text-align: left;
             }
 
